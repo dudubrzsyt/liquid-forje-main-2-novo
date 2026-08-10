@@ -11,9 +11,17 @@ export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
       { title: "Portfólio — projetos que geram resultado | Diamante.dev" },
-      { name: "description", content: "Cases reais de landing pages, sites institucionais e e-commerces: métricas de performance, conversão e design premium." },
+      {
+        name: "description",
+        content:
+          "Cases reais de landing pages, sites institucionais e e-commerces: métricas de performance, conversão e design premium.",
+      },
       { property: "og:title", content: "Portfólio — projetos que geram resultado" },
-      { property: "og:description", content: "Cases de landing pages, institucionais e e-commerces com métricas reais de performance e conversão." },
+      {
+        property: "og:description",
+        content:
+          "Cases de landing pages, institucionais e e-commerces com métricas reais de performance e conversão.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -62,13 +70,15 @@ function Portfolio() {
       <section className="pt-8 pb-14 text-center">
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-white/90">
-            <TrendingUp className="h-3.5 w-3.5 text-accent" /> Resultados reais · Métricas verificadas
+            <TrendingUp className="h-3.5 w-3.5 text-accent" /> Resultados reais · Métricas
+            verificadas
           </span>
           <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.05]">
             Projetos que <span className="text-gradient">viram receita</span>.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base sm:text-lg text-white/70">
-            Cada projeto nasce de um objetivo de negócio. Aqui estão alguns dos resultados que entreguei.
+            Cada projeto nasce de um objetivo de negócio. Aqui estão alguns dos resultados que
+            entreguei.
           </p>
         </Reveal>
       </section>
@@ -78,8 +88,12 @@ function Portfolio() {
           <Reveal key={c.title} delay={i * 90} variant="zoom">
             <article className="group glass-panel overflow-hidden hover-lift h-full">
               <div className="relative aspect-[16/10] overflow-hidden">
-                <img src={c.img} alt={`Projeto ${c.title} — ${c.type}`} loading="lazy"
-                     className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110" />
+                <img
+                  src={c.img}
+                  alt={`Projeto ${c.title} — ${c.type}`}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
+                />
                 <span className="absolute left-4 top-4 rounded-full glass px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white">
                   {c.type}
                 </span>
@@ -106,9 +120,16 @@ function Portfolio() {
 
       <section className="py-16">
         <Reveal className="glass-panel p-8 sm:p-10 text-center">
-          <h2 className="text-2xl sm:text-4xl font-black text-white">Seu projeto pode ser o próximo case.</h2>
-          <p className="mx-auto mt-3 max-w-xl text-white/70">Me conta a ideia — devolvo um plano com escopo, prazo e preço em até 24h.</p>
-          <Link to="/vendas" className="mt-6 inline-flex rounded-full bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] px-6 py-3.5 font-semibold text-primary-foreground shadow-xl shadow-primary/30 transition hover:bg-[position:100%_0]">
+          <h2 className="text-2xl sm:text-4xl font-black text-white">
+            Seu projeto pode ser o próximo case.
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-white/70">
+            Me conta a ideia — devolvo um plano com escopo, prazo e preço em até 24h.
+          </p>
+          <Link
+            to="/vendas"
+            className="mt-6 inline-flex rounded-full bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] px-6 py-3.5 font-semibold text-primary-foreground shadow-xl shadow-primary/30 transition hover:bg-[position:100%_0]"
+          >
             Ver pacotes e preços
           </Link>
         </Reveal>
@@ -116,10 +137,14 @@ function Portfolio() {
 
       <section className="pb-20 grid gap-8 lg:grid-cols-2 items-center">
         <Reveal variant="left">
-          <h2 className="text-3xl md:text-4xl font-black text-white">Quer um orçamento <span className="text-gradient">agora</span>?</h2>
+          <h2 className="text-3xl md:text-4xl font-black text-white">
+            Quer um orçamento <span className="text-gradient">agora</span>?
+          </h2>
           <p className="mt-3 text-white/70 max-w-lg">Preencha e cai direto no meu WhatsApp.</p>
         </Reveal>
-        <Reveal variant="right" delay={80}><ContactForm /></Reveal>
+        <Reveal variant="right" delay={80}>
+          <ContactForm />
+        </Reveal>
       </section>
     </div>
   );

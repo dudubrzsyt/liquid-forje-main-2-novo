@@ -1,7 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
-import { parseGithubLogin, fetchGithubSignals, baseScore, aiReview, decide } from "@/lib/devs.server";
+import {
+  parseGithubLogin,
+  fetchGithubSignals,
+  baseScore,
+  aiReview,
+  decide,
+} from "@/lib/devs.server";
 
 const DevInput = z.object({
   full_name: z.string().trim().min(3).max(120),
@@ -24,7 +30,10 @@ export const submitDevProfile = createServerFn({ method: "POST" })
 
     const login = parseGithubLogin(data.github_url);
     if (!login) {
-      return { ok: false as const, error: "Informe um link válido do GitHub (ex.: https://github.com/seu-usuario)." };
+      return {
+        ok: false as const,
+        error: "Informe um link válido do GitHub (ex.: https://github.com/seu-usuario).",
+      };
     }
 
     const { data: profile, error: upsertError } = await supabase
@@ -56,11 +65,15 @@ export const submitDevProfile = createServerFn({ method: "POST" })
 
     const signals = await fetchGithubSignals(login);
     if (!signals) {
-      await supabase.from("dev_profiles").update({ github_verified: false, status: "em_analise" }).eq("user_id", userId);
+      await supabase
+        .from("dev_profiles")
+        .update({ github_verified: false, status: "em_analise" })
+        .eq("user_id", userId);
       return {
         ok: true as const,
         verified: false,
-        message: "Perfil salvo, mas não conseguimos verificar seu GitHub. Confira o link — a verificação é obrigatória.",
+        message:
+          "Perfil salvo, mas não conseguimos verificar seu GitHub. Confira o link — a verificação é obrigatória.",
       };
     }
 
@@ -102,7 +115,8 @@ export const reanalyzeDevProfile = createServerFn({ method: "POST" })
       .eq("user_id", userId)
       .maybeSingle();
 
-    if (!profile?.github_login) return { ok: false as const, error: "Cadastre seu perfil de dev primeiro." };
+    if (!profile?.github_login)
+      return { ok: false as const, error: "Cadastre seu perfil de dev primeiro." };
 
     const signals = await fetchGithubSignals(profile.github_login);
     if (!signals) return { ok: false as const, error: "GitHub indisponível no momento." };

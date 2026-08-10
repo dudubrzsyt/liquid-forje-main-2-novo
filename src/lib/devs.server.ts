@@ -25,7 +25,9 @@ const GH_HEADERS = {
 };
 
 export async function fetchGithubSignals(login: string): Promise<GithubSignals | null> {
-  const userRes = await fetch(`https://api.github.com/users/${encodeURIComponent(login)}`, { headers: GH_HEADERS });
+  const userRes = await fetch(`https://api.github.com/users/${encodeURIComponent(login)}`, {
+    headers: GH_HEADERS,
+  });
   if (!userRes.ok) return null;
   const user = (await userRes.json()) as Record<string, unknown>;
 
@@ -36,7 +38,9 @@ export async function fetchGithubSignals(login: string): Promise<GithubSignals |
   const repos = reposRes.ok ? ((await reposRes.json()) as Record<string, unknown>[]) : [];
 
   const createdAt = typeof user.created_at === "string" ? user.created_at : null;
-  const ageYears = createdAt ? (Date.now() - new Date(createdAt).getTime()) / (1000 * 60 * 60 * 24 * 365) : 0;
+  const ageYears = createdAt
+    ? (Date.now() - new Date(createdAt).getTime()) / (1000 * 60 * 60 * 24 * 365)
+    : 0;
 
   const langCount = new Map<string, number>();
   let stars = 0;
@@ -58,17 +62,18 @@ export async function fetchGithubSignals(login: string): Promise<GithubSignals |
     accountAgeYears: Number(ageYears.toFixed(2)),
     publicRepos: typeof user.public_repos === "number" ? user.public_repos : ownRepos.length,
     followers: typeof user.followers === "number" ? user.followers : 0,
-    languages: [...langCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([l]) => l),
+    languages: [...langCount.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([l]) => l),
     totalStars: stars,
     recentPushDays: lastPush ? Math.round((Date.now() - lastPush) / 86400000) : null,
-    topRepos: ownRepos
-      .slice(0, 8)
-      .map((r) => ({
-        name: String(r.name ?? ""),
-        stars: typeof r.stargazers_count === "number" ? r.stargazers_count : 0,
-        language: typeof r.language === "string" ? r.language : null,
-        pushedAt: typeof r.pushed_at === "string" ? r.pushed_at : "",
-      })),
+    topRepos: ownRepos.slice(0, 8).map((r) => ({
+      name: String(r.name ?? ""),
+      stars: typeof r.stargazers_count === "number" ? r.stargazers_count : 0,
+      language: typeof r.language === "string" ? r.language : null,
+      pushedAt: typeof r.pushed_at === "string" ? r.pushed_at : "",
+    })),
   };
 }
 
@@ -79,7 +84,15 @@ export function baseScore(s: GithubSignals): number {
   const stars = Math.min(15, Math.log2(s.totalStars + 1) * 4);
   const followers = Math.min(10, Math.log2(s.followers + 1) * 3);
   const activity =
-    s.recentPushDays == null ? 0 : s.recentPushDays <= 30 ? 20 : s.recentPushDays <= 90 ? 14 : s.recentPushDays <= 365 ? 7 : 2;
+    s.recentPushDays == null
+      ? 0
+      : s.recentPushDays <= 30
+        ? 20
+        : s.recentPushDays <= 90
+          ? 14
+          : s.recentPushDays <= 365
+            ? 7
+            : 2;
   return Math.round(Math.max(0, Math.min(100, age + repos + langs + stars + followers + activity)));
 }
 
@@ -94,7 +107,8 @@ export async function aiReview(input: {
   const key = process.env.LOVABLE_API_KEY;
   const fallback = {
     score: input.heuristic,
-    summary: "Score calculado a partir dos sinais públicos do GitHub (idade da conta, repositórios, linguagens e atividade recente).",
+    summary:
+      "Score calculado a partir dos sinais públicos do GitHub (idade da conta, repositórios, linguagens e atividade recente).",
   };
   if (!key) return fallback;
 
@@ -109,7 +123,7 @@ export async function aiReview(input: {
           {
             role: "system",
             content:
-              "Você avalia a confiabilidade técnica de desenvolvedores para um marketplace brasileiro. Responda SOMENTE JSON válido: {\"score\": number 0-100, \"summary\": string em português com no máximo 400 caracteres}. Seja rigoroso e objetivo; use o score heurístico como âncora e ajuste no máximo 15 pontos.",
+              'Você avalia a confiabilidade técnica de desenvolvedores para um marketplace brasileiro. Responda SOMENTE JSON válido: {"score": number 0-100, "summary": string em português com no máximo 400 caracteres}. Seja rigoroso e objetivo; use o score heurístico como âncora e ajuste no máximo 15 pontos.',
           },
           {
             role: "user",
@@ -132,7 +146,10 @@ export async function aiReview(input: {
     if (!match) return fallback;
     const parsed = JSON.parse(match[0]) as { score?: number; summary?: string };
     const score = Math.max(0, Math.min(100, Math.round(Number(parsed.score ?? input.heuristic))));
-    return { score: Number.isFinite(score) ? score : input.heuristic, summary: parsed.summary ?? fallback.summary };
+    return {
+      score: Number.isFinite(score) ? score : input.heuristic,
+      summary: parsed.summary ?? fallback.summary,
+    };
   } catch {
     return fallback;
   }

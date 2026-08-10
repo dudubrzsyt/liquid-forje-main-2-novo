@@ -23,7 +23,10 @@ export function Reveal({ children, delay = 0, className = "", variant = "up", as
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (typeof IntersectionObserver === "undefined") { setShown(true); return; }
+    if (typeof IntersectionObserver === "undefined") {
+      setShown(true);
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -46,7 +49,9 @@ export function Reveal({ children, delay = 0, className = "", variant = "up", as
       ref={ref as React.Ref<HTMLDivElement>}
       style={{ transitionDelay: `${delay}ms` }}
       className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
-        shown ? "opacity-100 translate-x-0 translate-y-0 scale-100 blur-0" : `opacity-0 ${variants[variant]}`
+        shown
+          ? "opacity-100 translate-x-0 translate-y-0 scale-100 blur-0"
+          : `opacity-0 ${variants[variant]}`
       } ${className}`}
     >
       {children}

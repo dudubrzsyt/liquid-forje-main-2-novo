@@ -1,24 +1,49 @@
-export type DiamondTier =
-  | "negro"
-  | "rosa"
-  | "perolado"
-  | "rubi"
-  | "diamante_negro"
-  | "elite";
+export type DiamondTier = "negro" | "rosa" | "perolado" | "rubi" | "diamante_negro" | "elite";
 
 export const TIERS: Record<
   DiamondTier,
   { label: string; from: string; to: string; ring: string; min: number }
 > = {
-  negro: { label: "Diamante Negro Bruto", from: "#3f3f46", to: "#0a0a0a", ring: "rgba(255,255,255,.35)", min: 0 },
-  rosa: { label: "Diamante Rosa", from: "#f9a8d4", to: "#be185d", ring: "rgba(249,168,212,.6)", min: 20 },
-  perolado: { label: "Diamante Perolado", from: "#f8fafc", to: "#94a3b8", ring: "rgba(226,232,240,.7)", min: 40 },
+  negro: {
+    label: "Diamante Negro Bruto",
+    from: "#3f3f46",
+    to: "#0a0a0a",
+    ring: "rgba(255,255,255,.35)",
+    min: 0,
+  },
+  rosa: {
+    label: "Diamante Rosa",
+    from: "#f9a8d4",
+    to: "#be185d",
+    ring: "rgba(249,168,212,.6)",
+    min: 20,
+  },
+  perolado: {
+    label: "Diamante Perolado",
+    from: "#f8fafc",
+    to: "#94a3b8",
+    ring: "rgba(226,232,240,.7)",
+    min: 40,
+  },
   rubi: { label: "Rubi", from: "#fb7185", to: "#9f1239", ring: "rgba(244,63,94,.6)", min: 60 },
-  diamante_negro: { label: "Diamante Negro", from: "#a78bfa", to: "#111827", ring: "rgba(167,139,250,.6)", min: 75 },
+  diamante_negro: {
+    label: "Diamante Negro",
+    from: "#a78bfa",
+    to: "#111827",
+    ring: "rgba(167,139,250,.6)",
+    min: 75,
+  },
   elite: { label: "Elite", from: "#67e8f9", to: "#1d4ed8", ring: "rgba(103,232,249,.7)", min: 90 },
 };
 
-export const TIER_ORDER: DiamondTier[] = ["negro", "rosa", "perolado", "rubi", "diamante_negro", "elite"];
+export const TIER_ORDER: DiamondTier[] = [
+  "negro",
+  "rosa",
+  "perolado",
+  "rubi",
+  "diamante_negro",
+  "elite",
+];
 
 export function tierFromScore(score: number): DiamondTier {
   let tier: DiamondTier = "negro";
@@ -74,4 +99,3 @@ export function planWeight(plan?: PlanId | null) {
   if (plan === "basico") return 1;
   return 0;
 }
-

@@ -30,22 +30,32 @@ export function SiteFooter() {
             <Wordmark className="text-lg" />
           </div>
           <p className="text-sm text-white/60 leading-relaxed max-w-sm">
-            Sites modernos, agressivos e sofisticados. Feito à mão por {CONTACT.name.split(" ").slice(0, 2).join(" ")}.
+            Sites modernos, agressivos e sofisticados. Feito à mão por{" "}
+            {CONTACT.name.split(" ").slice(0, 2).join(" ")}.
           </p>
         </div>
 
         <div>
-          <h4 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider">Navegação</h4>
+          <h4 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider">
+            Navegação
+          </h4>
           <ul className="space-y-2 text-sm text-white/70">
             {links.map((l) => (
               <li key={l.to}>
-                <Link to={l.to} className="inline-block transition-transform duration-300 hover:translate-x-1 hover:text-white">{l.label}</Link>
+                <Link
+                  to={l.to}
+                  className="inline-block transition-transform duration-300 hover:translate-x-1 hover:text-white"
+                >
+                  {l.label}
+                </Link>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider">Contato</h4>
+          <h4 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider">
+            Contato
+          </h4>
           <ul className="space-y-2 text-sm text-white/70 break-words">
             <li>{CONTACT.whatsappDisplay}</li>
             <li>{CONTACT.email}</li>
@@ -62,8 +72,14 @@ export function SiteFooter() {
               { icon: Github, href: CONTACT.github, l: "GitHub" },
               { icon: Linkedin, href: CONTACT.linkedin, l: "LinkedIn" },
             ].map(({ icon: Icon, href, l }) => (
-              <a key={l} href={href} target="_blank" rel="noopener noreferrer" aria-label={l}
-                 className="grid h-10 w-10 place-items-center rounded-full glass text-white/90 transition-all duration-300 hover:text-white hover:scale-110 hover:-translate-y-1">
+              <a
+                key={l}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={l}
+                className="grid h-10 w-10 place-items-center rounded-full glass text-white/90 transition-all duration-300 hover:text-white hover:scale-110 hover:-translate-y-1"
+              >
                 <Icon className="h-4 w-4" />
               </a>
             ))}

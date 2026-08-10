@@ -51,7 +51,10 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
     window.open(buildWhatsappUrl(summary), "_blank", "noopener");
     // Fallback e-mail caso o WhatsApp não abra.
     setTimeout(() => {
-      window.location.href = buildMailtoUrl(`Novo projeto — ${projectLabels[d.projectType]}`, summary);
+      window.location.href = buildMailtoUrl(
+        `Novo projeto — ${projectLabels[d.projectType]}`,
+        summary,
+      );
       setLoading(false);
       toast.success("Mensagem enviada! Vou responder rapidinho.");
       (e.target as HTMLFormElement).reset();
@@ -59,10 +62,18 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`glass-panel p-6 md:p-8 space-y-4 ${compact ? "" : "max-w-2xl"}`}>
+    <form
+      onSubmit={handleSubmit}
+      className={`glass-panel p-6 md:p-8 space-y-4 ${compact ? "" : "max-w-2xl"}`}
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Nome" name="name" placeholder="Seu nome" required />
-        <Field label="Contato (telefone / @ / e-mail)" name="contact" placeholder="Ex: +55 11 9..." required />
+        <Field
+          label="Contato (telefone / @ / e-mail)"
+          name="contact"
+          placeholder="Ex: +55 11 9..."
+          required
+        />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Select label="Tipo de projeto" name="projectType" options={projectLabels} />
@@ -92,7 +103,11 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
   );
 }
 
-function Field({ label, name, ...rest }: React.InputHTMLAttributes<HTMLInputElement> & { label: string; name: string }) {
+function Field({
+  label,
+  name,
+  ...rest
+}: React.InputHTMLAttributes<HTMLInputElement> & { label: string; name: string }) {
   return (
     <div>
       <label className="block text-sm font-medium mb-1.5 text-white/90">{label}</label>
@@ -105,7 +120,15 @@ function Field({ label, name, ...rest }: React.InputHTMLAttributes<HTMLInputElem
   );
 }
 
-function Select({ label, name, options }: { label: string; name: string; options: Record<string, string> }) {
+function Select({
+  label,
+  name,
+  options,
+}: {
+  label: string;
+  name: string;
+  options: Record<string, string>;
+}) {
   return (
     <div>
       <label className="block text-sm font-medium mb-1.5 text-white/90">{label}</label>
@@ -115,7 +138,9 @@ function Select({ label, name, options }: { label: string; name: string; options
         className="w-full rounded-xl bg-white/5 border border-white/15 px-4 py-3 text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/30 transition [&>option]:bg-[oklch(0.16_0.08_260)]"
       >
         {Object.entries(options).map(([k, v]) => (
-          <option key={k} value={k}>{v}</option>
+          <option key={k} value={k}>
+            {v}
+          </option>
         ))}
       </select>
     </div>

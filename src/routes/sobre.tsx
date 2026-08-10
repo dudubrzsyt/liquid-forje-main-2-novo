@@ -21,92 +21,78 @@ export const Route = createFileRoute("/sobre")({
   component: Sobre,
 });
 
-
 function Sobre() {
   return (
-
-
-
     <div className="mx-auto max-w-5xl px-4 sm:px-6">
-  {/* Seção principal */}
-  <section className="pt-8 pb-16">
-    <div className="glass-panel p-8 md:p-14 relative overflow-hidden">
-      <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-gradient-to-br from-primary to-accent opacity-30 blur-3xl" />
-      <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-white/90">
-        <Code2 className="h-3.5 w-3.5 text-accent" />
-         Desenvolvedor Full-Stack
-      </span>
+      {/* Seção principal */}
+      <section className="pt-8 pb-16">
+        <div className="glass-panel p-8 md:p-14 relative overflow-hidden">
+          <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-gradient-to-br from-primary to-accent opacity-30 blur-3xl" />
+          <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-white/90">
+            <Code2 className="h-3.5 w-3.5 text-accent" />
+            Desenvolvedor Full-Stack
+          </span>
+          {/* Wrapper que alinha nome + foto (responsivo) */}
+          <span className="absolute top-0 right-0 h-full w-full rounded-full bg-gradient-to-r from-primary to-accent opacity-30 blur-3xl">
+            <Code2 className="h-3.5 w-3.5 text-accent" />
+          </span>
+          IGOR EDUARDO PINHEIRO DE ARAUJO
+          <div className="md:absolute md:top-8 md:right-8 z-30 pointer-events-none w-full md:w-auto flex justify-end mt-8 md:mt-0">
+            <div className="relative transform -translate-x-6 sm:-translate-x-8 md:translate-x-0 w-33 h-33 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-52 lg:h-52">
+              {/* Anel arco-íris vibrante girando rápido (conic gradient + blur) */}
+              <div
+                aria-hidden="true"
+                className="absolute -inset-1 rounded-full animate-spin-fast"
+                style={{
+                  backgroundImage: "conic-gradient(#ff007a, #ffcc00, #00e5ff, #7dff4d, #ff007a)",
+                  filter: "blur(10px)",
+                  opacity: 0.98,
+                }}
+              />
 
+              {/* Anel frontal sutil com leve balanço */}
+              <div className="absolute inset-0 rounded-full border-4 border-white/10 pointer-events-none animate-sway-fast" />
 
-      
-      {/* Wrapper que alinha nome + foto (responsivo) */}
-      <span className="absolute top-0 right-0 h-full w-full rounded-full bg-gradient-to-r from-primary to-accent opacity-30 blur-3xl">
-      <Code2 className="h-3.5 w-3.5 text-accent" /></span>IGOR EDUARDO PINHEIRO DE ARAUJO  
-      
-      
+              {/* Container da foto (garante overflow e contorno) */}
+              <div className="relative w-full h-full rounded-full overflow-hidden z-10">
+                {/* Foto redonda fixa (removida/comentada para não bloquear o slideshow) */}
 
-  <div className="md:absolute md:top-8 md:right-8 z-30 pointer-events-none w-full md:w-auto flex justify-end mt-8 md:mt-0">
-  <div className="relative transform -translate-x-6 sm:-translate-x-8 md:translate-x-0 w-33 h-33 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-52 lg:h-52">
+                {/* Camada de brilho/color overlay */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 rounded-full pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 20%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%)",
+                    mixBlendMode: "overlay",
+                  }}
+                />
 
-    {/* Anel arco-íris vibrante girando rápido (conic gradient + blur) */}
-    <div
-      aria-hidden="true"
-      className="absolute -inset-1 rounded-full animate-spin-fast"
-      style={{
-        backgroundImage:
-          "conic-gradient(#ff007a, #ffcc00, #00e5ff, #7dff4d, #ff007a)",
-        filter: "blur(10px)",
-        opacity: 0.98,
-      }}
-    />
+                {/* Anel frontal sutil com leve balanço */}
+                <div className="absolute inset-0 rounded-full border-4 border-white/10 pointer-events-none animate-sway-fast" />
 
-    {/* Anel frontal sutil com leve balanço */}
-    <div className="absolute inset-0 rounded-full border-4 border-white/10 pointer-events-none animate-sway-fast" />
+                {/* Container da foto (garante overflow e contorno) */}
+                <div className="relative w-full h-full rounded-full overflow-hidden">
+                  <img
+                    src={igor}
+                    alt="Foto do Igor Eduardo"
+                    loading="lazy"
+                    className="w-full h-full object-cover rounded-full ring-4 ring-white/10 shadow-lg"
+                    style={{ backgroundColor: "rgba(255,255,255,0.02)" }}
+                  />
+                  {/* Foto redonda */}
+                  <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden">
+                    <img
+                      src={igor}
+                      alt="Foto do Igor Eduardo"
+                      className="absolute inset-0 w-full h-full object-cover rounded-full"
+                      style={{
+                        animation: "fade1 8s infinite",
+                        transition: "opacity 0.5s ease-in-out",
+                      }}
+                    />
 
-    {/* Container da foto (garante overflow e contorno) */}
-    <div className="relative w-full h-full rounded-full overflow-hidden z-10">
-      {/* Foto redonda fixa (removida/comentada para não bloquear o slideshow) */}
-
-
-
-      {/* Camada de brilho/color overlay */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 rounded-full pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 20%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%)",
-          mixBlendMode: "overlay",
-        }}
-      />
-    
-
-
-            {/* Anel frontal sutil com leve balanço */}
-            <div className="absolute inset-0 rounded-full border-4 border-white/10 pointer-events-none animate-sway-fast" />
-
-            {/* Container da foto (garante overflow e contorno) */}
-            <div className="relative w-full h-full rounded-full overflow-hidden">
-          <img
-        src={igor}
-        alt="Foto do Igor Eduardo"
-        loading="lazy"
-        className="w-full h-full object-cover rounded-full ring-4 ring-white/10 shadow-lg"
-        style={{ backgroundColor: "rgba(255,255,255,0.02)" }}
-      />
-              {/* Foto redonda */}
-             <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden">
-
-<img
-    src={igor}
-    alt="Foto do Igor Eduardo"
-     className="absolute inset-0 w-full h-full object-cover rounded-full"
-     style={{ animation: "fade1 8s infinite", transition: "opacity 0.5s ease-in-out" }}
-    />
-
-
-  
-  <style>{`
+                    <style>{`
     @keyframes fade1 {
   0%, 24% { opacity: 1; }
   25%, 100% { opacity: 0; }
@@ -127,38 +113,30 @@ function Sobre() {
 }
 
   `}</style>
-</div>
+                  </div>
 
-
-                
-
-              {/* Camada de brilho/color overlay */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 rounded-full pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 20%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%)",
-                  mixBlendMode: "overlay",
-                }}
-              />
+                  {/* Camada de brilho/color overlay */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    style={{
+                      background:
+                        "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 20%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%)",
+                      mixBlendMode: "overlay",
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-            
-
-
           {/* Texto adicional dentro do mesmo glass-panel */}
           <p className="mt-6 max-w-2xl text-lg text-white/80 leading-relaxed">
-            Cada projeto é feito à mão, com atenção aos mínimos detalhes. Desde landing pages rápidas até
-            e-commerces de alta complexidade — o objetivo é sempre o mesmo: entregar um site que transmita
-            confiança, valorize o produto e converta visitantes em clientes.
+            Cada projeto é feito à mão, com atenção aos mínimos detalhes. Desde landing pages
+            rápidas até e-commerces de alta complexidade — o objetivo é sempre o mesmo: entregar um
+            site que transmita confiança, valorize o produto e converta visitantes em clientes.
           </p>
         </div>
       </section>
-      
-      
 
       {/* Cards de diferenciais */}
       <section className="pb-16 grid gap-5 md:grid-cols-2">
@@ -218,6 +196,5 @@ function Sobre() {
         </div>
       </section>
     </div>
-    
   );
 }
