@@ -30,7 +30,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Analytics } from "@vercel/analytics/react";
 import { pageview, event } from "@vercel/analytics"; // pageview() e event() para eventos custom
-
+// pageview() é usado para registrar a visualização de páginas
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
