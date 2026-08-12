@@ -2,6 +2,11 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
+// client.ts
+console.log("CLIENT URL:", import.meta.env.VITE_SUPABASE_URL);
+console.log("CLIENT KEY:", import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
+
+
 function isNewSupabaseApiKey(value: string): boolean {
   return value.startsWith('sb_publishable_') || value.startsWith('sb_secret_');
 }
@@ -30,8 +35,19 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
 function createSupabaseClient() {
   // Use import.meta.env for client-side (Vite build-time replacement)
   // Fall back to process.env for SSR (server-side rendering)
-  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
-  const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
+ const SUPABASE_URL = "https://axrzfczbwuiuagqvwuom.supabase.co";
+ const SUPABASE_PUBLISHABLE_KEY = "sb-publishable_hS9L40EvUlFocR5kwDcAgQ_8MyOfWg9";
+
+  try {
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+    throw new Error("Supabase config ausente");
+  }
+  console.log("[Supabase] Configuração carregada com sucesso.");
+} catch (err) {
+  // Em vez de vermelho, mostra um aviso discreto
+  console.warn("[Supabase] Variáveis não encontradas, usando fallback.");
+}
+
 
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
     const missing = [

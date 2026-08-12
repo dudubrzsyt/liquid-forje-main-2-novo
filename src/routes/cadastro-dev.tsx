@@ -136,7 +136,7 @@ function CadastroDevPage() {
             <p className="mt-2 text-sm opacity-70">Precisamos de uma conta para vincular seu score, assinatura e histórico.</p>
             <Link
               to="/auth"
-              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-transform duration-300 hover:scale-105"
+              className="mt-5 inline-flex rounded-xl bg-yellow-300  to-amber-500 shadow-lg shadow-amber-400/30 hover:brightness-110 px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105"
             >
               Entrar ou criar conta
             </Link>

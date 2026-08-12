@@ -29,7 +29,7 @@ export function SiteFooter() {
             <Logo size={40} />
             <Wordmark className="text-lg" />
           </div>
-          <p className="text-sm text-white/60 leading-relaxed max-w-sm">
+          <p className="text-sm text-white leading-relaxed max-w-sm">
             Sites modernos, agressivos e sofisticados. Feito à mão por {CONTACT.name.split(" ").slice(0, 2).join(" ")}.
           </p>
         </div>

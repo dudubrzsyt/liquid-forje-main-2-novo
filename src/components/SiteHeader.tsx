@@ -19,7 +19,6 @@ const nav = [
   { to: "/processo", label: "Processo" },
   { to: "/faq", label: "FAQ" },
   { to: "/sobre", label: "Quem Somos" },
-  { to: "/contato", label: "Contato" },
 ];
 
 
@@ -75,15 +74,15 @@ export function SiteHeader() {
 
   return (
  <header
-  className="fixed top-0 inset-x-0 z-40 bg-black/10 backdrop-blur-md transition duration-300"
+  className="fixed top-0 inset-x-0 z-40 bg-black/10 backdrop-blur-md transition duration-300 border-b border-white/5"
 >
 
 
 
 
 
-
-      <div className={`mx-auto flex max-w-7xl items-center justify-center gap-0 px-4 sm:px-6 transition-all duration-500 ${scrolled ? "py-2" : "py-3 md:py-0"}`}>
+      
+     <div className={`mx-auto flex max-w-1x1 items-center justify-between px-4 sm:px-6 transition-all duration-300 ${scrolled ? "py-1" : "py-3 md:py-0.5"}`}>
         <Link to="/" className="flex items-center gap-2 group shrink-0" onClick={() => setOpen(false)}>
           <span className="transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
             <Logo size={36} />
@@ -166,8 +165,7 @@ style={{ WebkitTextStroke: '0.5px rgba(0,0,0,0.6)' }}
 
 
 
-           
-          <button
+                     <button
             className="lg:hidden grid h-9 w-9 place-items-center rounded-full glass text-black active:scale-90 transition"
             onClick={() => setOpen((o) => !o)}
             aria-label="Menu"
@@ -179,28 +177,59 @@ style={{ WebkitTextStroke: '0.5px rgba(0,0,0,0.6)' }}
       </div>
 
       <div className="h-[2px] w-full bg-white/5">
-        <div className="h-full bg-gradient-to-r from-primary via-accent to-primary transition-[width] duration-150" style={{ width: `${progress}%` }} />
+        <div
+          className="h-full bg-gradient-to-r from-primary via-accent to-primary transition-[width] duration-150"
+          style={{ width: `${progress}%` }}
+        />
       </div>
 
+      {/* === MENU MOBILE (corrigido: grid responsivo, rolável, animações mantidas) === */}
       <div
         className={`lg:hidden overflow-hidden chrome-glass-panel transition-[max-height,opacity] duration-500 ${
           open ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="flex flex-col p-4 gap-1">
-          {nav.map((n, i) => (
-            <Link
-              key={n.to + "-" + i}
-              to={n.to}
-              onClick={() => setOpen(false)}
-              style={{ transitionDelay: `${i * 35}ms` }}
-              className={`flex items-center justify-between px-4 py-3 rounded-2xl text-white/90 hover:bg-white/10 transition-all duration-500 ${open ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"}`}
-              activeProps={{ className: "flex items-center justify-between px-4 py-3 rounded-2xl text-white bg-white/15 font-semibold" }}
-            >
-              {n.label} <ChevronRight className="h-4 w-4 opacity-50" />
-            </Link>
-          ))}
+        <nav className="p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 overflow-y-auto max-h-[68vh]">
+            {nav.map((n, i) => (
+              <Link
+                key={n.to + "-" + i}
+                to={n.to}
+                onClick={() => setOpen(false)}
+                style={{ transitionDelay: `${i * 35}ms` }}
+                className={`flex items-center justify-between w-full px-4 py-3 rounded-2xl text-white/90 hover:bg-white/10 transition-all duration-500 ${
+                  open ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
+                }`}
+                activeProps={{
+                  className:
+                    "flex items-center justify-between w-full px-4 py-3 rounded-2xl text-white bg-white/15 font-semibold",
+                }}
+              >
+                <span className="truncate w-full pr-3">{n.label}</span>
+                <ChevronRight className="h-4 w-4 opacity-50" />
+              </Link>
+            ))}
+          </div>
         </nav>
+
+        {/* rodapé do menu mobile */}
+        <div className="flex items-center justify-between px-4 py-4 border-t border-white/5">
+          <Link
+            to="/vendas"
+            onClick={() => setOpen(false)}
+           className="absolute left-[5%] button-3 px-5 py-3 rounded-full border bg-gradient-to-r from-primary via-accent to-primary text-sm font-semibold text-white transform -translate-y-4"
+
+          >
+            Pacotes
+          </Link>
+          <Link
+            to="/contato"
+            onClick={() => setOpen(false)}
+            className="absolute left-[45%] bottom-3 px-5 py-3 rounded-full border border-white/10 text-sm font-semibold text-white"
+          >
+            Contato
+          </Link>
+        </div>
       </div>
     </header>
   );

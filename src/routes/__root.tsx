@@ -18,37 +18,83 @@ import { FloatingSocial } from "@/components/FloatingSocial";
 import { ShaderBg } from "@/components/ShaderBg";
 import { supabase } from "@/integrations/supabase/client";
 import { applySettings, loadSettings } from "@/lib/site-settings";
+import { motion } from "framer-motion";
+
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="glass-panel max-w-md text-center p-10">
-        <h1 className="text-7xl font-black text-gradient">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-white">Página não encontrada</h2>
-        <p className="mt-2 text-sm text-white/60">Essa rota não existe ou foi movida.</p>
-        <Link to="/" className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90">
+    <div className="flex min-h-screen items-center justify-center px-4 bg-gradient-to-br from-gray-900 via-black to-gray-800">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="glass-panel max-w-md text-center p-10 rounded-xl shadow-xl backdrop-blur-md"
+      >
+        <motion.h1
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-7xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-transparent"
+        >
+          404
+        </motion.h1>
+        <h2 className="mt-4 text-2xl font-bold text-white">Página não encontrada</h2>
+        <p className="mt-2 text-sm text-gray-300">
+          Essa rota não existe ou foi movida.
+        </p>
+        <Link
+          to="/"
+          className="mt-6 inline-flex rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:scale-105 transition-transform duration-300"
+        >
           Voltar ao início
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+export function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => { reportLovableError(error, { boundary: "tanstack_root_error_component" }); }, [error]);
+
+  useEffect(() => {
+    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+  }, [error]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="glass-panel max-w-md text-center p-10">
-        <h1 className="text-xl font-semibold text-white">Ops, algo falhou.</h1>
-        <p className="mt-2 text-sm text-white/60">Tente novamente ou volte para a página inicial.</p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button onClick={() => { router.invalidate(); reset(); }}
-            className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">Tentar de novo</button>
-          <a href="/" className="rounded-full glass px-4 py-2 text-sm font-medium text-white">Início</a>
+    <div className="flex min-h-screen items-center justify-center px-4 bg-gradient-to-br from-gray-900 via-black to-gray-800">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="glass-panel max-w-md text-center p-10 rounded-xl shadow-xl backdrop-blur-md"
+      >
+        <h1 className="text-2xl font-bold text-red-400 animate-pulse">Ops, algo deu errado!</h1>
+        <p className="mt-2 text-sm text-gray-300">
+          Tente novamente ou volte para a página inicial.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
+            className="rounded-full bg-gradient-to-r from-green-500 to-emerald-600 px-5 py-2 text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all"
+          >
+            Tentar de novo
+          </motion.button>
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="/"
+            className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-5 py-2 text-sm font-medium text-white shadow-md hover:shadow-lg transition-all"
+          >
+            Início
+          </motion.a>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

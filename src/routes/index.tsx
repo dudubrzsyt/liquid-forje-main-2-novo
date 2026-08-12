@@ -23,7 +23,7 @@ function Home() {
       {/* HERO FULLSCREEN */}
       <section
         aria-label="Hero"
-        className="relative h-screen md:h-[100vh] w-full"
+        className="relative h-screen md:h-[105vh] w-full flex items-start"
         style={{
           backgroundImage: `url(${heroImg})`,
           backgroundPosition: "center top",
@@ -31,33 +31,49 @@ function Home() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* overlay sutil para garantir contraste (ajustável) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.35)] via-[rgba(0,0,0,0.18)] to-[rgba(255,255,255,0.02)] backdrop-blur-sm" />
+       {/* overlay sutil para garantir contraste (ajustável) */}
+<div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.35)] via-[rgba(0,0,0,0.18)] to-[rgba(255,255,255,0.02)] backdrop-blur-sm" />
 
-        {/* conteúdo centralizado */}
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 h-full flex items-center">
-          <div className="w-full">
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
-              <Reveal className="animate-fade-up">
-                <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-white/90">
-                  <Sparkles className="h-3.5 w-3.5 text-accent" /> Novo · Design iOS 27 · Shaders líquidos
-                </span>
+{/* conteúdo centralizado abaixo da header */}
+<div className="absolute top-10 sm:top-16 z-10 mx-auto max-w-7xl px-4 sm:px-6 flex flex-col justify-start">
 
-                <h1
-                  className="mt-5 text-4xl font-black leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl"
-                  style={{ WebkitTextStroke: "0.4px rgba(0,0,0,0.6)" }}
-                >
-                  <span className="text-white drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]">Sites</span>{" "}
-                  <span className="text-gradient bg-clip-text text-transparent">agressivamente</span>{" "}
-                  <span className="text-white drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]">modernos.</span>
-                </h1>
+  <div className="w-full">
+    <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
+      <Reveal className="animate-fade-up">
+        <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-white">
+          <Sparkles className="h-3.5 w-3.5 text-accent" /> Novo · Design iOS 27 · Shaders líquidos
+        </span>
 
-                <p className="mt-5 max-w-xl text-lg text-white/85 leading-relaxed">
-                  Design sofisticado, performance real e experiências que convertem.
-                  Do landing page ao e-commerce corporativo — feitos à mão em TypeScript.
-                </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+
+<div className="!text-white isolate">
+  <h1
+    className="mt-5 text-4xl font-black leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl"
+    style={{ WebkitTextStroke: "0.4px rgba(0,0,0,0.6)" }}
+  >
+    <span className="drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]">
+      Sites
+    </span>{" "}
+    <span className="!text-blue-600 drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]">
+      agressivamente
+    </span>{" "}
+    <span className="drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]">
+      modernos.
+    </span>
+  </h1>
+
+  <p className="mt-5 max-w-xl text-lg leading-relaxed">
+    Design sofisticado, performance real e experiências que convertem.
+    Do landing page ao e-commerce corporativo — feitos à mão em TypeScript.
+  </p>
+</div>
+
+
+
+
+      
+
+                <div className="mt-4 flex flex-wrap gap-3">
                   <Link
                     to="/vendas"
                     className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] px-6 py-3.5 font-semibold text-primary-foreground shadow-xl shadow-primary/30 transition hover:bg-[position:100%_0] focus:outline-none focus:ring-2 focus:ring-accent"
@@ -100,7 +116,7 @@ function Home() {
     <img
       src={heroImg}
       alt="Mockups de sites modernos"
-      width={1600}
+      width={1900}
       height={1008}
       className="w-full h-full object-cover"
       fetchPriority="high"
@@ -125,12 +141,13 @@ function Home() {
 
       {/* RESTO DA PÁGINA: fundo branco */}
       <main className="bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl px-10 sm:px-15 lg:px-20 mt-16 sm:mt-24">
+
           {/* FEATURES */}
-          <section id="features" className="py-20">
+          <section id="features" className="py-40">
             <Reveal className="text-center max-w-2xl mx-auto mb-14">
-              <h2 className="text-3xl md:text-5xl font-black text-slate-900">Por que meus sites <span className="text-gradient">convertem</span></h2>
-              <p className="mt-4 text-slate-700">Cada detalhe pensado pra atrair confiança e valorizar seu produto.</p>
+              <h2 className="text-3xl md:text-5xl font-black text-white">Por que meus sites <span className="text-gradient">convertem</span></h2>
+              <p className="mt-4 text-white">Cada detalhe pensado pra atrair confiança e valorizar seu produto.</p>
             </Reveal>
             <div className="grid gap-5 md:grid-cols-3">
               {[
