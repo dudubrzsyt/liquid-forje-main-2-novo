@@ -108,17 +108,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Criação de sites modernos e sofisticados: landing pages, institucionais, e-commerce e projetos premium. Feito por Igor Eduardo, desenvolvedor full-stack." },
       { name: "author", content: "Igor Eduardo Pinheiro de Araujo" },
       { name: "theme-color", content: "#0b1030" },
+
+      // Open Graph
       { property: "og:title", content: "Diamante.dev — Sites modernos que vendem" },
       { property: "og:description", content: "Landing pages, institucionais, e-commerce e projetos premium com design sofisticado e performance real." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://diamante.dev/" },
+      { property: "og:image", content: "https://diamante.dev/og-image.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+
+      // Twitter
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Diamante.dev — Sites modernos que vendem" },
+      { name: "twitter:description", content: "Landing pages, institucionais, e-commerce e projetos premium com design sofisticado e performance real." },
+      { name: "twitter:image", content: "https://diamante.dev/og-image.png" },
     ],
     links: [
+      { rel: "canonical", href: "https://diamante.dev/" },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/diamante.dev/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": "https://diamante.dev/",
+          "name": "Diamante.dev",
+          "description": "Criação de sites modernos e sofisticados: landing pages, institucionais, e-commerce e projetos premium.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Diamante.dev"
+          }
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -126,6 +154,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
+
 
 function RootShell({ children }: { children: ReactNode }) {
   return (

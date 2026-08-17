@@ -17,9 +17,11 @@ import { Route as CadastroDevRouteImport } from './routes/cadastro-dev'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as DevsRouteImport } from './routes/devs'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as PagamentoRouteImport } from './routes/pagamento'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as ProcessoRouteImport } from './routes/processo'
+import { Route as ProjetosRouteImport } from './routes/projetos'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as VendasRouteImport } from './routes/vendas'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -68,6 +70,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PagamentoRoute = PagamentoRouteImport.update({
+  id: '/pagamento',
+  path: '/pagamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
@@ -81,6 +88,11 @@ const PremiumRoute = PremiumRouteImport.update({
 const ProcessoRoute = ProcessoRouteImport.update({
   id: '/processo',
   path: '/processo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjetosRoute = ProjetosRouteImport.update({
+  id: '/projetos',
+  path: '/projetos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SobreRoute = SobreRouteImport.update({
@@ -133,9 +145,11 @@ export interface FileRoutesByFullPath {
   '/contato': typeof ContatoRoute
   '/devs': typeof DevsRoute
   '/faq': typeof FaqRoute
+  '/pagamento': typeof PagamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
   '/processo': typeof ProcessoRoute
+  '/projetos': typeof ProjetosRoute
   '/sobre': typeof SobreRoute
   '/vendas': typeof VendasRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -153,9 +167,11 @@ export interface FileRoutesByTo {
   '/contato': typeof ContatoRoute
   '/devs': typeof DevsRoute
   '/faq': typeof FaqRoute
+  '/pagamento': typeof PagamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
   '/processo': typeof ProcessoRoute
+  '/projetos': typeof ProjetosRoute
   '/sobre': typeof SobreRoute
   '/vendas': typeof VendasRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -175,9 +191,11 @@ export interface FileRoutesById {
   '/contato': typeof ContatoRoute
   '/devs': typeof DevsRoute
   '/faq': typeof FaqRoute
+  '/pagamento': typeof PagamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
   '/processo': typeof ProcessoRoute
+  '/projetos': typeof ProjetosRoute
   '/sobre': typeof SobreRoute
   '/vendas': typeof VendasRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -197,9 +215,11 @@ export interface FileRouteTypes {
     | '/contato'
     | '/devs'
     | '/faq'
+    | '/pagamento'
     | '/portfolio'
     | '/premium'
     | '/processo'
+    | '/projetos'
     | '/sobre'
     | '/vendas'
     | '/admin'
@@ -217,9 +237,11 @@ export interface FileRouteTypes {
     | '/contato'
     | '/devs'
     | '/faq'
+    | '/pagamento'
     | '/portfolio'
     | '/premium'
     | '/processo'
+    | '/projetos'
     | '/sobre'
     | '/vendas'
     | '/admin'
@@ -238,9 +260,11 @@ export interface FileRouteTypes {
     | '/contato'
     | '/devs'
     | '/faq'
+    | '/pagamento'
     | '/portfolio'
     | '/premium'
     | '/processo'
+    | '/projetos'
     | '/sobre'
     | '/vendas'
     | '/_authenticated/admin'
@@ -260,9 +284,11 @@ export interface RootRouteChildren {
   ContatoRoute: typeof ContatoRoute
   DevsRoute: typeof DevsRoute
   FaqRoute: typeof FaqRoute
+  PagamentoRoute: typeof PagamentoRoute
   PortfolioRoute: typeof PortfolioRoute
   PremiumRoute: typeof PremiumRoute
   ProcessoRoute: typeof ProcessoRoute
+  ProjetosRoute: typeof ProjetosRoute
   SobreRoute: typeof SobreRoute
   VendasRoute: typeof VendasRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -327,6 +353,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pagamento': {
+      id: '/pagamento'
+      path: '/pagamento'
+      fullPath: '/pagamento'
+      preLoaderRoute: typeof PagamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio': {
       id: '/portfolio'
       path: '/portfolio'
@@ -346,6 +379,13 @@ declare module '@tanstack/react-router' {
       path: '/processo'
       fullPath: '/processo'
       preLoaderRoute: typeof ProcessoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projetos': {
+      id: '/projetos'
+      path: '/projetos'
+      fullPath: '/projetos'
+      preLoaderRoute: typeof ProjetosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sobre': {
@@ -433,9 +473,11 @@ const rootRouteChildren: RootRouteChildren = {
   ContatoRoute: ContatoRoute,
   DevsRoute: DevsRoute,
   FaqRoute: FaqRoute,
+  PagamentoRoute: PagamentoRoute,
   PortfolioRoute: PortfolioRoute,
   PremiumRoute: PremiumRoute,
   ProcessoRoute: ProcessoRoute,
+  ProjetosRoute: ProjetosRoute,
   SobreRoute: SobreRoute,
   VendasRoute: VendasRoute,
   BlogSlugRoute: BlogSlugRoute,

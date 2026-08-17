@@ -10,9 +10,13 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
+    resolve: {
+      tsconfigPaths: true, // ativa resolução nativa de paths do tsconfig
+    },
     define: {
       "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(env.VITE_SUPABASE_URL),
       "import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(env.VITE_SUPABASE_PUBLISHABLE_KEY),
     },
+    // se você tinha o plugin vite-tsconfig-paths em plugins: [], remova-o daqui
   },
 });

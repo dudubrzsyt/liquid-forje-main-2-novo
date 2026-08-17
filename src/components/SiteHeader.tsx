@@ -11,6 +11,7 @@ const nav = [
   { to: "/devs", label: "Ranking Devs" },
   { to: "/cadastro-dev", label: "Cadastre-se como Dev" },
   { to: "/assinaturas", label: "Assinaturas" },
+  { to: "/pagamento", label: "Pagamento" },
   { to: "/vendas", label: "Pacotes" },
   { to: "/premium", label: "Premium" },
   { to: "/portfolio", label: "Portfólio" },
@@ -19,6 +20,8 @@ const nav = [
   { to: "/processo", label: "Processo" },
   { to: "/faq", label: "FAQ" },
   { to: "/sobre", label: "Quem Somos" },
+  { to: "/projetos", label: "Meus Projetos" },
+  { to: "/perfil", label: "Meu Perfil" },
 ];
 
 

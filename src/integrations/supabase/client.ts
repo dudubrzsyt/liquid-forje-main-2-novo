@@ -3,12 +3,20 @@ import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
 // client.ts
-console.log("CLIENT URL:", import.meta.env.VITE_SUPABASE_URL);
-console.log("CLIENT KEY:", import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
+
+
+const SUPABASE_URL = "https://oriazwbnnglhqnifnchx.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yaWF6d2JubmdsaHFuaWZuY2h4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NjE3NzcsImV4cCI6MjEwMjEzNzc3N30.Q3EBsHePj-mfiraBSK-d5otPZH2SUTbTiUaoeCJboLI"; // anon key
+
+
+console.log("CLIENT URL:", SUPABASE_URL);
+console.log("CLIENT KEY:", SUPABASE_PUBLISHABLE_KEY);
+
+
 
 
 function isNewSupabaseApiKey(value: string): boolean {
-  return value.startsWith('sb_publishable_') || value.startsWith('sb_secret_');
+  return value.startsWith('sb-publishable_') || value.startsWith('sb-secret_');
 }
 
 function createSupabaseFetch(supabaseKey: string): typeof fetch {
@@ -31,33 +39,25 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
   };
 }
 
-
 function createSupabaseClient() {
-  // Use import.meta.env for client-side (Vite build-time replacement)
-  // Fall back to process.env for SSR (server-side rendering)
- const SUPABASE_URL = "https://axrzfczbwuiuagqvwuom.supabase.co";
- const SUPABASE_PUBLISHABLE_KEY = "sb-publishable_hS9L40EvUlFocR5kwDcAgQ_8MyOfWg9";
-
   try {
-  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-    throw new Error("Supabase config ausente");
+    if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+      throw new Error("Supabase config ausente");
+    }
+    console.log("[Supabase] Configuração carregada com sucesso.");
+  } catch (err) {
+    console.warn("[Supabase] Variáveis não encontradas, usando fallback.");
   }
-  console.log("[Supabase] Configuração carregada com sucesso.");
-} catch (err) {
-  // Em vez de vermelho, mostra um aviso discreto
-  console.warn("[Supabase] Variáveis não encontradas, usando fallback.");
+
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+  const missing = [
+    ...(!SUPABASE_URL ? ["SUPABASE_URL"] : []),
+    ...(!SUPABASE_PUBLISHABLE_KEY ? ["SUPABASE_PUBLISHABLE_KEY"] : []),
+  ];
+  const message = `Missing Supabase environment variable(s): ${missing.join(", ")}. Connect Supabase in Lovable Cloud.`;
+  console.error(`[Supabase] ${message}`);
+  throw new Error(message);
 }
-
-
-  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-    const missing = [
-      ...(!SUPABASE_URL ? ['SUPABASE_URL'] : []),
-      ...(!SUPABASE_PUBLISHABLE_KEY ? ['SUPABASE_PUBLISHABLE_KEY'] : []),
-    ];
-    const message = `Missing Supabase environment variable(s): ${missing.join(', ')}. Connect Supabase in Lovable Cloud.`;
-    console.error(`[Supabase] ${message}`);
-    throw new Error(message);
-  }
 
   return createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
     global: {
@@ -75,10 +75,4 @@ let _supabase: ReturnType<typeof createSupabaseClient> | undefined;
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
-export const supabase = new Proxy({} as ReturnType<typeof createSupabaseClient>, {
-  get(_, prop, receiver) {
-    if (!_supabase) _supabase = createSupabaseClient();
-    return Reflect.get(_supabase, prop, receiver);
-  },
-});
-
+export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
