@@ -28,6 +28,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedComunidadeRouteImport } from './routes/_authenticated/comunidade'
 import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
+import { Route as ApiPagamentoRouteImport } from './routes/api/pagamento'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
@@ -126,6 +127,11 @@ const AuthenticatedPerfilRoute = AuthenticatedPerfilRouteImport.update({
   path: '/perfil',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiPagamentoRoute = ApiPagamentoRouteImport.update({
+  id: '/api/pagamento',
+  path: '/api/pagamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/comunidade': typeof AuthenticatedComunidadeRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/perfil': typeof AuthenticatedPerfilRoute
+  '/api/pagamento': typeof ApiPagamentoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -178,6 +185,7 @@ export interface FileRoutesByTo {
   '/comunidade': typeof AuthenticatedComunidadeRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/perfil': typeof AuthenticatedPerfilRoute
+  '/api/pagamento': typeof ApiPagamentoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -202,6 +210,7 @@ export interface FileRoutesById {
   '/_authenticated/comunidade': typeof AuthenticatedComunidadeRoute
   '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
+  '/api/pagamento': typeof ApiPagamentoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/comunidade'
     | '/configuracoes'
     | '/perfil'
+    | '/api/pagamento'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/comunidade'
     | '/configuracoes'
     | '/perfil'
+    | '/api/pagamento'
     | '/blog/$slug'
     | '/blog'
   id:
@@ -271,6 +282,7 @@ export interface FileRouteTypes {
     | '/_authenticated/comunidade'
     | '/_authenticated/configuracoes'
     | '/_authenticated/perfil'
+    | '/api/pagamento'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -291,6 +303,7 @@ export interface RootRouteChildren {
   ProjetosRoute: typeof ProjetosRoute
   SobreRoute: typeof SobreRoute
   VendasRoute: typeof VendasRoute
+  ApiPagamentoRoute: typeof ApiPagamentoRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -430,6 +443,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPerfilRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/pagamento': {
+      id: '/api/pagamento'
+      path: '/api/pagamento'
+      fullPath: '/api/pagamento'
+      preLoaderRoute: typeof ApiPagamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -480,6 +500,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjetosRoute: ProjetosRoute,
   SobreRoute: SobreRoute,
   VendasRoute: VendasRoute,
+  ApiPagamentoRoute: ApiPagamentoRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
